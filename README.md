@@ -34,7 +34,32 @@ To run Potato Game locally, follow these steps:
 ### Prerequisites
 - Node.js (v16 or higher)
 - NPM or Yarn package manager
+- Firebase account (for database and authentication)
 
+### Firebase Setup (Required)
+1. Create a Firebase account at [Firebase Console](https://console.firebase.google.com/)
+2. Create a new project
+3. Set up Firestore Database
+   - Go to Firestore Database and click "Create database"
+   - Choose "Start in production mode" and select a location
+4. Get your Firebase config:
+   - Go to Project Settings > General > Your apps
+   - Click the web icon (</>) to add a web app
+   - Register your app with a nickname
+   - Copy the Firebase configuration object
+5. Replace the Firebase configuration in `game.js` with your own:
+   ```javascript
+   const firebaseConfig = {
+     apiKey: "YOUR_API_KEY",
+     authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+     databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+     projectId: "YOUR_PROJECT_ID",
+     storageBucket: "YOUR_PROJECT_ID.appspot.com",
+     messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+     appId: "YOUR_APP_ID"
+   };
+   ```
+   
 ### Setup
 1. Clone the repository:
 ```bash
