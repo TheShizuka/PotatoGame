@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://firestore.googleapis.com wss://*.firebaseio.com; script-src 'self' https://extension-files.twitch.tv 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <title>Potato Game</title>
+</head>
+<body>
+  <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
+  <div id="game-status">
+    <div class="game-status-item">
+      <div class="game-status-label">Highscore</div>
+      <div id="game-highscore-value">0</div>
+    </div>
+    
+    <div id="top-buttons">
+      <button id="pause-button" class="control-button" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="4" width="4" height="16"></rect>
+          <rect x="14" y="4" width="4" height="16"></rect>
+        </svg>
+      </button>
+      <button id="refresh-button" class="control-button" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 4v6h-6"></path>
+          <path d="M1 20v-6h6"></path>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"></path>
+          <path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="container">
+    <div id="game-container">
+      <!-- Pause Screen -->
+      <div id="pause-screen" style="display: none;">
+        <div id="pause-menu">
+          <div id="leaderboard-pause">
+            <h3>Top Scores</h3>
+            <ul id="leaderboard-list-pause">
+              <!-- Leaderboard entries will be populated here -->
+            </ul>
+          </div>
+          <h1>Game Paused</h1>
+          <button id="resume-game">Resume Game</button>
+          <button id="end-game">End Game</button>
+        </div>
+      </div>
+      
+      <!-- Game End Screen - Moved outside the UI container -->
+      <div id="game-end-container" style="display: none;">
+        <div id="game-end">
+          <h2 id="game-end-title">Game Over!</h2>
+          <div id="leaderboard">
+            <h2 id="new-record"></h2>
+            <h3>Top Scores</h3>
+            <ul id="leaderboard-list">
+              <!-- Leaderboard entries will be populated here -->
+            </ul>
+          </div>
+          <button id="game-end-link">Try Again</button>
+        </div>
+      </div>
+      
+      <!-- Username Entry Form -->
+      <div id="username-entry" style="display: none;">
+        <input type="text" id="username-input" placeholder="Enter your Twitch Username" />
+        <button id="submitUsernameButton">Submit</button>
+      </div>
+      
+      <canvas id="gameCanvas"></canvas>
+      
+      <div id="game-ui">
+        <div class="height-warning" style="display: none;">Warning! Stack is too high!</div>
+        <div id="score-center">
+          <p id="game-score"></p>
+          <div class="game-status-item">
+            <p id="next">Next</p>
+            <img id="game-next-fruit" src="./assets/img/circle0.png" />
+          </div>
+        </div>
+        <!-- Game End Container was here before - now moved out -->
+      </div>
+    </div>
+  </div>
+  
+  <script src="matter.js"></script>
+  <script type="module" src="bundle.js"></script>
+</body>
+</html>
